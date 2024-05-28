@@ -26,7 +26,7 @@ void thread_1() {
          }
     wait(1, SC_SEC);
     m.unlock();
-    std::cout << sc_time_stamp() << ": unlocked by thread_1" << std::endl; 
+    std::cout << sc_time_stamp() << ": unlocked by thread_1" << std::endl;
     wait(SC_ZERO_TIME);
    }
  }
@@ -36,11 +36,11 @@ void thread_2 () {
    while (true) {
      if (m.trylock() == -1) {
        m.lock();
-       std::cout << sc_time_stamp() << ": thread_2 obtained resource by lock()" << std::endl; 
+       std::cout << sc_time_stamp() << ": thread_2 obtained resource by lock()" << std::endl;
        cin.get();
                             }
      else {
-       std::cout << sc_time_stamp() << ": thread_2 obtained resource by trylock()" << std::endl; 
+       std::cout << sc_time_stamp() << ": thread_2 obtained resource by trylock()" << std::endl;
        cin.get();
           }
      wait(1, SC_SEC);
