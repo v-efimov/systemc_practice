@@ -68,7 +68,7 @@ void generator3() {
 }
 
 void consumer3() {
-   int v = -1;
+  int v = -1;
   while (true) {
     std::cout << sc_time_stamp() << ": consumer3, before read, #free/#available=" << f3.num_free() << "/" << f3.num_available() << std::endl;
     f3.read(v);

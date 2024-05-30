@@ -1,6 +1,6 @@
 include ../../build-unix/Makefile.config
 
-PROJECT := channel_mutex
+PROJECT := channel_fifo
 SRCS    := $(wildcard *.cpp)
 OBJS    := $(SRCS:.cpp=.o)
 
