@@ -15,7 +15,7 @@ void ARBITER::arbiter() {
     while (carryon == 1) {
         if (rrtoggle == 0) {
             if (inp1->nb_read(ReadFIFO1) == true) {
-                so1.write(ReadFIFO1);
+                outp1->write(ReadFIFO1);
                 //std::cout << sc_time_stamp() << "ReadFIFO1 data: " << ReadFIFO1 << "---" << std::endl;
                 rrtoggle = 1;
             }
@@ -23,7 +23,7 @@ void ARBITER::arbiter() {
         else
         {
             if (inp2->nb_read(ReadFIFO2) == true) {
-                so1.write(ReadFIFO2);
+                outp1->write(ReadFIFO2);
                 //std::cout << sc_time_stamp() << "ReadFIFO2 data: " << ReadFIFO2 << "---" << std::endl;
                 rrtoggle = 0;
             }
