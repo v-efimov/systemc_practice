@@ -11,6 +11,7 @@ void TB::writer() {
     }
     else
     {
+    //otherwise either handshake happened or there was no valid before so we
     //generate new random valid here
     //if valid equal to 1 then assign new data
         if (std::rand() % 100 <= valid_probability) {

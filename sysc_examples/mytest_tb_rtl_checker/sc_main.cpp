@@ -19,6 +19,6 @@ int sc_main(int, char* []) {
     tb.ready_if(bfm.ready_p);
     bfm.input_if(tlm.input_p);
 
-    sc_start(51, SC_SEC);
+    sc_start(151, SC_SEC);
     return 0;
 }
