@@ -7,6 +7,7 @@ SC_MODULE (TB) {
   sc_signal<bool> valid_ch;
   sc_export<sc_signal<int>> data_p;
   sc_signal<int> data_ch;
+  sc_port<sc_signal_in_if<bool>> ready_if;
 
   SC_CTOR(TB) {
     data_p(data_ch);
