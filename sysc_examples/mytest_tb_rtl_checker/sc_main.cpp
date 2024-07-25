@@ -14,10 +14,10 @@ int sc_main(int, char* []) {
     TLM tlm("tlm");
     tb.clk(clk);
     bfm.clk(clk);
-    bfm.valid_if(tb.valid_p);
-    bfm.data_if(tb.data_p);
-    tb.ready_if(bfm.ready_p);
-    bfm.input_if(tlm.input_p);
+    bfm.AXIS_valid_if(tb.AXIM_valid_p);
+    bfm.AXIS_data_if(tb.AXIM_data_p);
+    tb.AXIM_ready_if(bfm.AXIS_ready_p);
+    bfm.PIPEM_if(tlm.PIPES_p);
 
     sc_start(151, SC_SEC);
     return 0;
