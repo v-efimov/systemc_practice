@@ -23,7 +23,7 @@ void TB::tb_process() {
             AXIM_valid_ch.write(false);
         }
     }
-    std::cout << sc_time_stamp() << ", prev_valid =" << AXIM_valid_ch.read() << ", prev_data =" << AXIM_data_ch.read() << ", prev_ready =" << AXIM_ready_if->read() <<std::endl;
+   //std::cout << sc_time_stamp() << ", prev_valid =" << AXIM_valid_ch.read() << ", prev_data =" << AXIM_data_ch.read() << ", prev_ready =" << AXIM_ready_if->read() <<std::endl;
     wait();
   }
 }
