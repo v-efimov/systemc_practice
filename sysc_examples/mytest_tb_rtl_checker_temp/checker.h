@@ -2,6 +2,7 @@
 #define CHECKER_H
 
 SC_MODULE(CHECKER) {
+  
   sc_port<sc_signal_in_if<bool>> clk;
   sc_port<sc_signal_in_if<bool>> AXIS_valid_if;
   sc_port<sc_signal_in_if<int>> AXIS_data_if;

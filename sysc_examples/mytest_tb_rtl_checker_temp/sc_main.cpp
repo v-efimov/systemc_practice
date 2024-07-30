@@ -7,6 +7,7 @@
 
 using namespace sc_core;
 
+//#define TRACE_SIG(F, X) sc_core::sc_trace(F, X, X.name())
 
 int sc_main(int, char* []) {
     sc_clock clk ("clk", 10, SC_SEC, 0.2, 10, SC_SEC, false);
@@ -26,6 +27,9 @@ int sc_main(int, char* []) {
     checker.AXIS_data_if(bfm.AXIM_data_p);
     bfm.AXIM_ready_if(checker.AXIS_ready_p);
 
-    sc_start(151, SC_SEC);
+    //sc_trace_file* file = sc_create_vcd_trace_file("trace");
+    sc_start(10151, SC_SEC);
+    //sc_close_vcd_trace_file(file);
+
     return 0;
 }

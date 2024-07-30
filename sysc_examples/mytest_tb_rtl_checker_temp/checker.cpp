@@ -2,7 +2,7 @@
 #include "checker.h"
 
 void CHECKER::checker_process() {
-  int ready_probability = 50;
+  int ready_probability = 5;
   while (true) {
     //we are comparing pre-clock value here.
     //check if handshake happened then push to TLM FIFO

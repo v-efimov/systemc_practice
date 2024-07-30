@@ -7,7 +7,7 @@ SC_MODULE (TLM) {
   sc_export<sc_fifo<int>> PIPEM_p;
   sc_fifo<int> PIPEM_ch;
 
-  SC_CTOR(TLM) {
+  SC_CTOR(TLM) : PIPES_ch(4), PIPEM_ch(4) {
     PIPES_p(PIPES_ch);
     PIPEM_p(PIPEM_ch);
     SC_THREAD(tlm_process);

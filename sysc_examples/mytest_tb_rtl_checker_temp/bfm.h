@@ -18,14 +18,18 @@ SC_MODULE(BFM) {
     AXIS_ready_p(AXIS_ready_ch);
     AXIM_valid_p(AXIM_valid_ch);
     AXIM_data_p(AXIM_data_ch);
-    SC_THREAD(bfm_process);
+    SC_THREAD(bfm_process_axis);
+    sensitive << clk;
+    dont_initialize();
+    SC_THREAD(bfm_process_axim);
     sensitive << clk;
     dont_initialize();
   }
   ~BFM() {
     std::cout << sc_time_stamp() << ": Cleanup: destructor" << std::endl;
   }
-  void bfm_process();
+  void bfm_process_axis();
+  void bfm_process_axim();
 };
 
 #endif
