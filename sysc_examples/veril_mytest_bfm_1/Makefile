@@ -1,3 +1,4 @@
+.RECIPEPREFIX = >
 ######################################################################
 #
 # DESCRIPTION: Verilator Example: Small Makefile
@@ -66,51 +67,51 @@ default: nosc
 endif
 
 run:
-	@echo
-	@echo "-- Verilator tracing example"
+> @echo
+> @echo "-- Verilator tracing example"
 
-	@echo
-	@echo "-- VERILATE ----------------"
-	$(VERILATOR) $(VERILATOR_FLAGS) $(VERILATOR_INPUT)
+> @echo
+> @echo "-- VERILATE ----------------"
+> $(VERILATOR) $(VERILATOR_FLAGS) $(VERILATOR_INPUT)
 
-	@echo
-	@echo "-- COMPILE -----------------"
+> @echo
+> @echo "-- COMPILE -----------------"
 # To compile, we can either
 # 1. Pass --build to Verilator by editing VERILATOR_FLAGS above.
 # 2. Or, run the make rules Verilator does:
-#	$(MAKE) -j -C obj_dir -f Vtop.mk
+#       $(MAKE) -j -C obj_dir -f Vtop.mk
 # 3. Or, call a submakefile where we can override the rules ourselves:
-	$(MAKE) -j -C obj_dir -f ../Makefile_obj
+> $(MAKE) -j -C obj_dir -f ../Makefile_obj
 
-	@echo
-	@echo "-- RUN ---------------------"
-	@rm -rf logs
-	@mkdir -p logs
-	obj_dir/Vtop +trace
+> @echo
+> @echo "-- RUN ---------------------"
+> @rm -rf logs
+> @mkdir -p logs
+> obj_dir/Vtop +trace
 
-	@echo
-	@echo "-- COVERAGE ----------------"
-	@rm -rf logs/annotated
-	$(VERILATOR_COVERAGE) --annotate logs/annotated logs/coverage.dat
+> @echo
+> @echo "-- COVERAGE ----------------"
+> @rm -rf logs/annotated
+> $(VERILATOR_COVERAGE) --annotate logs/annotated logs/coverage.dat
 
-	@echo
-	@echo "-- DONE --------------------"
-	@echo "To see waveforms, open vlt_dump.vcd in a waveform viewer"
-	@echo
+> @echo
+> @echo "-- DONE --------------------"
+> @echo "To see waveforms, open vlt_dump.vcd in a waveform viewer"
+> @echo
 
 
 ######################################################################
 # Other targets
 
 nosc:
-	@echo
-	@echo "%Skip: SYSTEMC_INCLUDE not in environment"
-	@echo "(If you have SystemC see the README, and rebuild Verilator)"
-	@echo
+> @echo
+> @echo "%Skip: SYSTEMC_INCLUDE not in environment"
+> @echo "(If you have SystemC see the README, and rebuild Verilator)"
+> @echo
 
 show-config:
-	$(VERILATOR) -V
+> $(VERILATOR) -V
 
 maintainer-copy::
 clean mostlyclean distclean maintainer-clean::
-	-rm -rf obj_dir logs *.log *.dmp *.vpd coverage.dat core
+> -rm -rf obj_dir logs *.log *.dmp *.vpd coverage.dat core
