@@ -13,7 +13,7 @@ public:
     if ( v != m_val) {
         m_val = v;
         e.notify();
-    }   
+    }
  }
  const int& read() const {
     return m_val;
@@ -43,7 +43,7 @@ SC_MODULE(TEST) {
  sensitive << s;
  dont_initialize();
  }
- 
+
  void writer() {
      int v = 1;
      while (true) {
