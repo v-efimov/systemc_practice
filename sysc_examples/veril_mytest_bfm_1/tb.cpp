@@ -5,7 +5,7 @@ void TB::tb_process() {
   int valid_probability = 75;
   int data = 1;
   while (true) {
-    if (AXIM_valid_ch.read() == true && AXIM_ready_if->read() == false) {
+    if (AXIM_valid_ch.read() == true && AXIM_ready_port->read() == false) {
     //we are comparing pre-clock value here.
     //if valid that is set just after clock on previous cycle has not been handshaked in the current cycle then keep valid up
     }

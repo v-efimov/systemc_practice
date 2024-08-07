@@ -59,7 +59,7 @@ int sc_main(int argc, char* argv[]) {
     ios::sync_with_stdio();
 
     // Define clocks
-    sc_clock clk{"clk", 10, SC_NS, 0.5, 3, SC_NS, true};
+    sc_clock clk_ch{"clk", 10, SC_NS, 0.5, 3, SC_NS, true};
 
     // Define interconnect
     sc_signal<bool> reset_l;
@@ -79,20 +79,20 @@ int sc_main(int argc, char* argv[]) {
     BFM bfm("bfm");
     TLM tlm("tlm");
     CHECKER checker("checker");
-    tb.clk(clk);
-    bfm.clk(clk);
-    checker.clk(clk);
-    bfm.AXIS_valid_if(tb.AXIM_valid_p);
-    bfm.AXIS_data_if(tb.AXIM_data_p);
-    tb.AXIM_ready_if(bfm.AXIS_ready_p);
-    bfm.PIPEM_if(tlm.PIPES_p);
-    bfm.PIPES_if(tlm.PIPEM_p);
-    checker.AXIS_valid_if(bfm.AXIM_valid_p);
-    checker.AXIS_data_if(bfm.AXIM_data_p);
-    bfm.AXIM_ready_if(checker.AXIS_ready_p);
+    tb.clk_port(clk_ch);
+    bfm.clk_port(clk_ch);
+    checker.clk_port(clk_ch);
+    bfm.AXIS_valid_port(tb.AXIM_valid_ptr);
+    bfm.AXIS_data_port(tb.AXIM_data_ptr);
+    tb.AXIM_ready_port(bfm.AXIS_ready_ptr);
+    bfm.PIPEM_port(tlm.PIPES_ptr);
+    bfm.PIPES_port(tlm.PIPEM_ptr);
+    checker.AXIS_valid_port(bfm.AXIM_valid_ptr);
+    checker.AXIS_data_port(bfm.AXIM_data_ptr);
+    bfm.AXIM_ready_port(checker.AXIS_ready_ptr);
 
     // Attach Vtop's signals to this upper model
-    top->clk(clk);
+    top->clk(clk_ch);
     //top->fastclk(fastclk);
     top->reset_l(reset_l);
     //top->in_small(in_small);
@@ -101,8 +101,8 @@ int sc_main(int argc, char* argv[]) {
     //top->out_small(out_small);
     //top->out_quad(out_quad);
     //top->out_wide(out_wide);
-    top->udrvn(checker.AXIS_valid_if);
-    top->udrvnd(checker.AXIS_data_if);
+    top->udrvn(checker.AXIS_valid_port);
+    top->udrvnd(checker.AXIS_data_port);
 
     // You must do one evaluation before enabling waves, in order to allow
     // SystemC to interconnect everything for testing.

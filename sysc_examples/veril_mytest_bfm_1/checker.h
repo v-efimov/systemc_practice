@@ -3,16 +3,16 @@
 
 SC_MODULE(CHECKER) {
 
-  sc_port<sc_signal_in_if<bool>> clk;
-  sc_port<sc_signal_in_if<bool>> AXIS_valid_if;
-  sc_port<sc_signal_in_if<std::uint32_t>> AXIS_data_if;
-  sc_export<sc_signal<bool>> AXIS_ready_p;
+  sc_port<sc_signal_in_if<bool>> clk_port;
+  sc_port<sc_signal_in_if<bool>> AXIS_valid_port;
+  sc_port<sc_signal_in_if<std::uint32_t>> AXIS_data_port;
+  sc_export<sc_signal<bool>> AXIS_ready_ptr;
   sc_signal<bool> AXIS_ready_ch;
 
   SC_CTOR(CHECKER) {
-    AXIS_ready_p(AXIS_ready_ch);
+    AXIS_ready_ptr(AXIS_ready_ch);
     SC_THREAD(checker_process);
-    sensitive << clk;
+    sensitive << clk_port;
     dont_initialize();
   }
   ~CHECKER() {
