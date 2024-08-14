@@ -62,7 +62,6 @@ virtual void b_transport ( tlm::tlm_generic_payload& trans, sc_time& delay )
     trans.set_response_status( tlm::TLM_OK_RESPONSE );
 }
   int mem[SIZE];
-  
 };
 
 #endif
