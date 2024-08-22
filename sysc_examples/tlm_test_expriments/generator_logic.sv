@@ -45,7 +45,7 @@ assign fast_rst   = handshake;
 
 assign fast_cnt_d = fast_rst ? 0 : (fast_incr ? fast_cnt + 1 : fast_cnt);
 
-always @(posedge clk) begin 
+always @(posedge clk) begin
     if (rst) begin
         fast_cnt <= 0;
     end else begin

@@ -23,9 +23,9 @@ int sc_main(int argc, char* argv[]) {
     sc_core::sc_signal<bool> rst;
     sc_core::sc_clock clk("clk", 10, sc_core::SC_NS, 0.5, 0, sc_core::SC_NS, true);
 
-    Vtop* top = new Vtop{"top"}; 
-    top->clk        (clk); 
-    top->rst        (rst);  
+    Vtop* top = new Vtop{"top"};
+    top->clk        (clk);
+    top->rst        (rst);
 
     Testbench tb("tb");
     tb.rst (rst);
@@ -42,7 +42,7 @@ int sc_main(int argc, char* argv[]) {
         tfp->close();
         tfp = nullptr;
     }
-    delete top; 
+    delete top;
 
     Verilated::mkdir("logs");
     VerilatedCov::write("logs/coverage.dat");

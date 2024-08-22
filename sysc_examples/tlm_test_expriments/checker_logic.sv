@@ -16,7 +16,7 @@ assign down_ready = 1'b1;
 
 
 reg[$clog2(DELAY):0]  fast_cnt;
-wire[$clog2(DELAY):0] fast_cnt_d;    
+wire[$clog2(DELAY):0] fast_cnt_d;
 wire                  fast_incr;
 wire                  fast_rst;
 
@@ -35,5 +35,5 @@ end
 
 
 assign up_ready = down_ready && (fast_cnt == DELAY);
-    
+
 endmodule
