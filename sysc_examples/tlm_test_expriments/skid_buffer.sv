@@ -67,7 +67,7 @@ reg [1:0] state, next;
 always @(posedge clk) begin
     if (rst) begin
         state <= BYPASS;
-    end else begin 
+    end else begin
         state <= next;
     end
 end
@@ -75,14 +75,14 @@ end
 always @(state or up_valid or down_ready) begin
     next = 2'bx;
     case (state)
-    BYPASS: 
+    BYPASS:
         if (up_valid & ~down_ready) begin
             next = SKID;
         end else begin
             next = BYPASS;
         end
-    SKID: 
-        if (down_ready) begin 
+    SKID:
+        if (down_ready) begin
             next = BYPASS;
         end else begin
             next = SKID;
