@@ -95,7 +95,7 @@ int sc_main(int argc, char* argv[]) {
     top->chk_up_valid(chk_up_valid);
     top->chk_up_data(chk_up_data);
     top->chk_up_ready(chk_up_ready);
- 
+
     // You must do one evaluation before enabling waves, in order to allow
     // SystemC to interconnect everything for testing.
     sc_start(1, SC_NS);
