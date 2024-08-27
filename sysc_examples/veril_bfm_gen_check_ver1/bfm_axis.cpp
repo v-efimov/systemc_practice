@@ -5,7 +5,7 @@ void BFM::bfm_process_axis() {
     if (rst_port->read() == true) {
        state = BYPASS;
        AXIS_ready_port->write(true);
-    } 
+    }
     else
     {
       //we are comparing pre-clock value here.

@@ -4,7 +4,7 @@
 void BFM::bfm_process_axim() {
     if (rst_port->read() == true) {
        AXIM_valid_port->write(true);
-    } 
+    }
     else
     {
       //we are comparing pre-clock value here.
