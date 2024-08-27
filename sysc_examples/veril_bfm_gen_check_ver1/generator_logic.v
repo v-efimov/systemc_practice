@@ -45,7 +45,7 @@ module generator_logic # (
     wire [DW-1:0] data_d;
 
     assign data_incr = down_valid && up_ready;
-    assign data_d = data_incr ? down_data + 1 : down_data;
+    assign data_d = data_incr ? (down_data + 1) : down_data;
 
 
     always @(posedge clk) begin

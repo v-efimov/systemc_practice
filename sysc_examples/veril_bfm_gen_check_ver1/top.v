@@ -1,6 +1,6 @@
 module top # (
     parameter DATA_WIDTH  = 32,
-    parameter DELAY_GEN   = 10,
+    parameter DELAY_GEN   = 0,
     parameter DELAY_CHK   = 0
 )
 (
