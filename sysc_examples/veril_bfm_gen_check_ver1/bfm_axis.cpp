@@ -9,19 +9,22 @@ void BFM::bfm_process_axis() {
     else
     {
       //we are comparing pre-clock value here.
-      //if handshake happened while FIFO buffer is not in SKID
-      if (state.read() == BufState::BYPASS && AXIS_valid_port->read() == true && AXIS_ready_port->read() == true) {
-          if (PIPEM_port->nb_write(AXIS_data_port->read()) == false) {
-              REG = AXIS_data_port->read();
-              state.write(BufState::SKID);
-              AXIS_ready_port->write(false);
+      //Write data into expansion REGs if handshake happens but no free place in PIPEM_FIFO
+      if (state.read() == BufState::BYPASS) {
+          if (AXIS_valid_port->read() == true && AXIS_ready_port->read() == true) {
+            if (PIPEM_port->nb_write(AXIS_data_port->read()) == false) {
+                REG.write(AXIS_data_port->read());
+                state.write(BufState::SKID);
+                AXIS_ready_port->write(false);
+            }
           }
       }
-      if (state.read() == BufState::SKID) {
+      else if (state.read() == BufState::SKID) {
           if (PIPEM_port->nb_write(REG) == true) {
              state.write(BufState::BYPASS);
              AXIS_ready_port->write(true);
           }
       }
+      else {}
     }
 }

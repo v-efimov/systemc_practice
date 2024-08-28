@@ -12,14 +12,12 @@ SC_MODULE(BFM) {
   sc_port<sc_signal_in_if<bool>> AXIM_ready_port;
   sc_port<sc_fifo_out_if<std::uint32_t>> PIPEM_port;
   sc_port<sc_fifo_in_if<std::uint32_t>> PIPES_port;
-  uint32_t REG;
+  sc_signal<std::uint32_t> REG;
   sc_signal<bool> state;
   enum BufState { BYPASS=false, SKID=true };
   uint32_t ReadValueFromPIPES;
 
   SC_CTOR(BFM) {
-    state = BYPASS;
-    //AXIS_ready_port->write(true);
     SC_METHOD(bfm_process_axis);
     sensitive << clk_port.pos();
     SC_METHOD(bfm_process_axim);
