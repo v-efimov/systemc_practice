@@ -7,13 +7,14 @@ source ./set_exports.bash
 
 ###########SYSTEMC###############
 Download
-https://www.accellera.org/images/downloads/standards/systemc/systemc-2.3.3.tar.gz
+wget https://www.accellera.org/images/downloads/standards/systemc/systemc-2.3.3.tar.gz
 Unzip to the folder:
 tar -xzvf ./systemc-2.3.3.tar.gz
 cd ./systemc-2.3.3
 mkdir ./objdir
 cd ./objdir
 ../configure
+###in ubuntu there is no gmake so just use make
 gmake
 gmake check
 ###"gmake check" shall finish with no errors
