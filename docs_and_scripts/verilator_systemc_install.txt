@@ -2,7 +2,7 @@
 #### INSTALLATION INSTRUCTION FOR SYSTEMC-2.3.3 AND VERILATOR v4.226 ####
 #########################################################################
 
-#####SET ENVORONMENT VARS########
+#####SET ENVIRONMENT VARS########
 source ./set_exports.bash
 
 ###########SYSTEMC###############
