@@ -22,7 +22,7 @@ gmake install
 gmake clean
 cd ../lib-linux64
 nm -C ./libsystemc.so | grep sc_api_version
-###Output of "nm" shall show cxx201402L like this "00000000000c1460 T sc_core::sc_api_version_2_3_3_cxx201402L"
+###Output of "nm" shall show C++ version like: cxx201402L like this "00000000000c1460 T sc_core::sc_api_version_2_3_3_cxx201402L"
 
 ##########VERILATOR##############
 ###MAKE SURE THESE PACKAGES ARE INSTALLED: sudo apt-get install git autoconf flex bison
