@@ -1,0 +1,50 @@
+#########################################################################
+#### INSTALLATION INSTRUCTION FOR SYSTEMC-2.3.3 AND VERILATOR v4.226 ####
+#########################################################################
+
+cd ~
+mkdir ./Verilator_SystemC
+cd ./Verilator_SystemC
+###set_exports.bash shall be placed into newly created '~/Verilator_SystemC' directory
+
+#####SET ENVIRONMENT VARS########
+source ./set_exports.bash
+
+###########SYSTEMC###############
+Download
+wget https://www.accellera.org/images/downloads/standards/systemc/systemc-2.3.3.tar.gz
+Unzip to the folder:
+tar -xzvf ./systemc-2.3.3.tar.gz
+cd ./systemc-2.3.3
+mkdir ./objdir
+cd ./objdir
+../configure
+###in ubuntu there is no gmake so just use make
+gmake
+gmake check
+###"gmake check" shall finish with no errors
+gmake install
+gmake clean
+cd ../lib-linux64
+nm -C ./libsystemc.so | grep sc_api_version
+###Output of "nm" shall show C++ version like: cxx201402L like this "00000000000c1460 T sc_core::sc_api_version_2_3_3_cxx201402L"
+
+##########VERILATOR##############
+###MAKE SURE THESE PACKAGES ARE INSTALLED: sudo apt-get install git autoconf flex bison
+
+git clone https://github.com/verilator/verilator
+cd ./verialtor
+git pull
+git tag
+git checkout v4.226
+
+autoconf
+./configure
+make -j `nproc`
+make test
+###"make test" shall finish with no errors
+###DON'T DO "make install"
+make clean
+###Do some tests from "examples" folder, go to example and do "make"
+
+###DONE###
