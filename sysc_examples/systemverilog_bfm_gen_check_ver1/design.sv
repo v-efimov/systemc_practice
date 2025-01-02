@@ -51,7 +51,7 @@ always @(posedge clk) begin
     if (rst) begin
         state <= BYPASS;
         gen_down_ready <= 1;
-    end 
+    end
     else begin
         if (state == BYPASS) begin
            if (gen_down_valid && gen_down_ready) begin
