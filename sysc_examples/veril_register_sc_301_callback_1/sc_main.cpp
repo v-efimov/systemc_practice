@@ -54,7 +54,7 @@ public:
       case SC_POST_UPDATE:   // for SC_POST_UPDATE..
         std::cout << "CASE_POST_UPDATE" << upd_count <<std::endl;
         upd_count++;
-      case SC_PRE_TIMESTEP:  //  ..and SC_PRE_TIMESTEP 
+      case SC_PRE_TIMESTEP:  //  ..and SC_PRE_TIMESTEP
         cb_count++;
         std::cout << "CASE_PRE_TIMESTEP" << cb_count <<std::endl;
         break;
@@ -65,7 +65,7 @@ public:
  }
 
   ~stage_tracer()
-  { 
+  {
     //sc_unregister_stage_callback( *this, SC_POST_BEFORE_END_OF_ELABORATION );
     //sc_unregister_stage_callback( *this, SC_POST_END_OF_ELABORATION );
     //sc_unregister_stage_callback( *this, SC_POST_START_OF_SIMULATION );
