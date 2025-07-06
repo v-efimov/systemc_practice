@@ -30,11 +30,11 @@ void uncore_module::b_transport (tlm::tlm_generic_payload& trans, sc_time& delay
 
         if (trans.is_read()) {
             command = 0;
-            cout << "TLM_rread_COMMAND" << endl; 
+            cout << "TLM_rread_COMMAND" << endl;
         }
         if (trans.is_write()) {
             command = 1;
-            cout << "TLM_wwrite_COMMAND" << endl; 
+            cout << "TLM_wwrite_COMMAND" << endl;
         }
 
         cout << "ADDR: " << addr << endl;
