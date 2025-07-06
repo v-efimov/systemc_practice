@@ -36,7 +36,7 @@ On the other side there is pins2queue module that samples data from pins and if 
 ## Transactions flow:
 
 This diagram shows transaction flow:
-![Image](./media/Spike_TLM20.drawio.svg)
+![Image](./media/Spike_TLM20.jpg)
 
 1. Spike is running in the SC_THREAD so it can call blocking functions (in our case not directly though bu b_transport that will call b_transport callback in the uncore and in the uncore blocking write and read interactions with sc_fifos).
 
