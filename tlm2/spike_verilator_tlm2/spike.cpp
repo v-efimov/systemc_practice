@@ -13,7 +13,7 @@ void spike_module::spike_thread() {
 
     input_sanity_check_ok = false;
     do {
-        std::cout << "Provide \"ADDRESS    DATA    OPERATION(1-write/2-read)\" separated by spaces: ";
+        std::cout << "Curr simtime:" <<  sc_time_stamp() << ", provide \"ADDRESS    DATA    OPERATION(1-write/2-read)\" separated by spaces: ";
         std::cin >> inputaddress >> inputdata >> inputoperation;
         if (!std::cin.fail() && inputoperation >= 1 && inputoperation <= 2) {
             input_sanity_check_ok = true;
