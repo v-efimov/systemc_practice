@@ -3,7 +3,7 @@
 
 template <typename T>
 struct queue2pins_module: sc_module {
-  sc_in_clk clk_port {""};
+  sc_in_clk clk_port;
   sc_port<sc_signal_in_if<bool>> rstn_port;
   sc_port<sc_signal_out_if<bool>> down_valid;
   sc_port<sc_signal_out_if<T>> down_data;
