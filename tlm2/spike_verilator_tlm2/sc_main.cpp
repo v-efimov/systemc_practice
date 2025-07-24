@@ -22,7 +22,7 @@
 
 // Include model header, generated from Verilating "top.v"
 #include "Vtop.h"
-#include "simcontrol.h"
+#include "reset.h"
 #include "pins2queue.h"
 #include "queue2pins.h"
 #include "uncore.h"
@@ -77,7 +77,7 @@ int sc_main(int argc, char* argv[]) {
     const std::unique_ptr<spike_module> spike{new spike_module{"spike"}};
     const std::unique_ptr<uncore_module> uncore{new uncore_module{"uncore"}};
 
-    const std::unique_ptr<simcontrol_module> simcontrol{new simcontrol_module{"simcontrol"}};
+    const std::unique_ptr<reset_module> reset{new reset_module{"reset"}};
     const std::unique_ptr<queue2pins_module<std::uint32_t>> queue2pins{new queue2pins_module<std::uint32_t>{"queue2pins"}};
     const std::unique_ptr<pins2queue_module<std::uint32_t>> pins2queue{new pins2queue_module<std::uint32_t>{"pins2queue"}};
 
@@ -100,8 +100,8 @@ int sc_main(int argc, char* argv[]) {
     pins2queue->down_PIPE(uncore->resp_PIPE);
 
 
-    simcontrol->rstn_port(resetn);
-    simcontrol->stopsim_port(stopsim);
+    reset->rstn_port(resetn);
+    spike->stopsim_port(stopsim);
 
 
     // Attach Vtop's signals to this upper model

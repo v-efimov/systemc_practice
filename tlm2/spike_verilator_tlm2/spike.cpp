@@ -1,8 +1,12 @@
 #include "systemc.h"
 #include "spike.h"
 
+void spike_module::start_of_simulation() {
+  stopsim_port->write(false);
+  std::cout << sc_time_stamp() << "Initial (STOPSIM_OFF)" << std::endl;
+}
+
 void spike_module::spike_thread() {
-  sc_time delay = sc_time(10, SC_NS);
 
   bool input_sanity_check_ok = false;
   int inputaddress;
@@ -39,7 +43,8 @@ void spike_module::spike_thread() {
     spike_uncore_trans->set_dmi_allowed(false);
     spike_uncore_trans->set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
 
-    spike_uncore_socket->b_transport(*spike_uncore_trans, delay);
+    model_delay = sc_time(10, SC_NS);
+    spike_uncore_socket->b_transport(*spike_uncore_trans, model_delay);
 
     if ( spike_uncore_trans->get_response_status() != tlm::TLM_OK_RESPONSE ) {
         cout << "Transaction returned with error: " << spike_uncore_trans->get_response_status() << endl;

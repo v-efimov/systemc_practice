@@ -59,5 +59,8 @@ void uncore_module::b_transport (tlm::tlm_generic_payload& trans, sc_time& delay
 
         }
 
+        wait(delay);
+        delay = SC_ZERO_TIME;    //we just set delay to zero as it is recommended by TLM2.0, this has no effect.
+
         trans.set_response_status(tlm::TLM_OK_RESPONSE);
 }
