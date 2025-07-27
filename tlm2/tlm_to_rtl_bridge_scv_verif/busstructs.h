@@ -38,6 +38,7 @@ public:
     data_t        data_struct;
     std::uint32_t data_vector;
     std::vector<sc_uint<8> > pending_read_addresses;
+    bool last_read;
 
     stimulus_class(scv_smart_ptr<data_t> &smrtptr) : smptr(smrtptr) {
         //Set randomisation parameters
@@ -49,6 +50,8 @@ public:
         data_struct.bus_addr = 0;
         data_struct.bus_data = 0;
         data_vector = 0;
+        pending_read_addresses.clear();
+        last_read = false;
     }
 
     void gen_write() {
@@ -60,6 +63,7 @@ public:
         //put data into pending_read_addresses list
         pending_read_addresses.push_back(data_struct.bus_addr);
         sync_vector_with_struct();
+        last_read = false;
     }
 
     bool gen_read() {
@@ -72,6 +76,12 @@ public:
             //pop data from pending_read_addresses list
             pending_read_addresses.pop_back();
             sync_vector_with_struct();
+            //if after pop no more pending reads exist then set last_read flag to true
+            if (pending_read_addresses.empty()) {
+                last_read = true;
+            } else {
+                last_read = false;
+            }
             return true;
         } else {
             return false;

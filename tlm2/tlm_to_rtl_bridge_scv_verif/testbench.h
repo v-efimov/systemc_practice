@@ -27,12 +27,13 @@ struct testbench_module: sc_module {
   std::unique_ptr<tlm::tlm_generic_payload> testbench_memmodel_trans;
   std::uint32_t data_array[1];      //ARRAY OF SIZE ONE ONLY IS CURRENTLY SUPPORTED BECAUSE INPUT DATA ACCEPTS ONLY ONE VALUE
 
-  sc_time no_delay = sc_time(0, SC_NS);
-  sc_time long_delay = sc_time(100, SC_NS);
-  sc_time random_delay = sc_time(50, SC_NS);
-  sc_time model_delay = sc_time(0, SC_NS);
+  sc_time gen_delay, chk_delay, model_delay;
 
-  SC_CTOR(testbench_module) : req_PIPE_ch(4), resp_PIPE_ch(4), ref_PIPE_ch(4), trtocken_PIPE_ch(40), smrtptr_data_t("data"), stimulus(smrtptr_data_t), response(), testbench_memmodel_trans(std::make_unique<tlm::tlm_generic_payload>()), data_array{777} {
+  const sc_time MODEL_DELAY = sc_time(0, SC_NS);
+  const int FINAL_TRANSFER_TOCKEN = 99;
+
+
+  SC_CTOR(testbench_module) : req_PIPE_ch(1), resp_PIPE_ch(1), ref_PIPE_ch(100), trtocken_PIPE_ch(100), smrtptr_data_t("data"), stimulus(smrtptr_data_t), response(), testbench_memmodel_trans(std::make_unique<tlm::tlm_generic_payload>()), data_array{777} {
     req_PIPE(req_PIPE_ch);
     resp_PIPE(resp_PIPE_ch);
     SC_THREAD(tbgen_thread);
@@ -45,8 +46,29 @@ struct testbench_module: sc_module {
 
   void start_of_simulation() override {
     stopsim_port->write(false);
-    std::cout << sc_time_stamp() << "Initial (RESET_ON)" << std::endl;
+    std::cout << sc_time_stamp() << "Initial (STOPSIM_OFF)" << std::endl;
   }
+
+  void get_thread_delay (sc_time &delay, int mode) {
+   switch (mode) {
+        case 0: {
+            delay = sc_time(0, SC_NS);              //Fast mode, zero delay
+            break;
+        }
+        case 1: {
+            int rand_ns = std::rand() % 3000 + 0;
+            delay = sc_time(rand_ns, SC_NS);        //Random delay
+            break;
+        }
+        case 2: {
+            delay = sc_time(3000, SC_NS);           //Slow mode, high delay
+            break;
+        }
+        default: {
+            delay = sc_time(0, SC_NS);;
+        }
+    }
+}
 
   void tbgen_thread();
   void tbchk_thread();
