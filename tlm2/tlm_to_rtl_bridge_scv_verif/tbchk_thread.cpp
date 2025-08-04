@@ -56,9 +56,9 @@ void testbench_module::tbchk_thread() {
   };
 
   if (sim_test_ok) {
-      cout << "SIMULATION_OK" << endl;
+      cout << "SIMULATION_PASS  :-)   :-)   :-)   :-)   :-)   :-)   :-)   :-)   :-)   :-)   :-)   :-)   :-)   :-)   :-)  SIMULATION_PASS" << endl;
   } else {
-      cout << "SIMULATION_ERROR!" << endl;
+      cout << ":-( SIMULATION_FAIL :-(" << endl;
   };
 
 }
