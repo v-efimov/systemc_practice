@@ -6,6 +6,7 @@
 #include "tlm_utils/simple_target_socket.h"
 
 struct uncore_module: sc_module {
+  sc_port<sc_signal_inout_if<bool>> stopsim_port;
   sc_export<sc_fifo<std::uint32_t>> req_PIPE;
   sc_fifo<std::uint32_t> req_PIPE_ch;
   sc_export<sc_fifo<std::uint32_t>> resp_PIPE;
@@ -25,6 +26,7 @@ struct uncore_module: sc_module {
     std::cout << sc_time_stamp() << ": Cleanup: destructor" << std::endl;
   }
 
+  void start_of_simulation() override;
 
   void b_transport (tlm::tlm_generic_payload& trans, sc_time& delay);
 

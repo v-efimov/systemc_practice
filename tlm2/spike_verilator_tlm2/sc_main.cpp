@@ -101,7 +101,7 @@ int sc_main(int argc, char* argv[]) {
 
 
     reset->rstn_port(resetn);
-    spike->stopsim_port(stopsim);
+    uncore->stopsim_port(stopsim);
 
 
     // Attach Vtop's signals to this upper model
