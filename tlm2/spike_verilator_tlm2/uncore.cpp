@@ -47,6 +47,7 @@ void uncore_module::b_transport (tlm::tlm_generic_payload& trans, sc_time& delay
             cout << "DATA: " << data[0] << endl;
             cout << "LENGTH: " << length << endl;
 
+            //Note: Here in this loop we can support bursts
             for (int i=0; i<length; i++) {
                 sc_bv<32> bv;
                 bv.range(31, 28) = command;

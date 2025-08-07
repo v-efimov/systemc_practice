@@ -58,7 +58,7 @@ void spike_module::spike_thread() {
     spike_uncore_socket->b_transport(*spike_uncore_trans, model_delay);
 
     if ( spike_uncore_trans->get_response_status() != tlm::TLM_OK_RESPONSE ) {
-        cout << "Transaction returned with error: " << spike_uncore_trans->get_response_status() << endl;
+        cout << "Transaction_return_is_NOT_ok: " << spike_uncore_trans->get_response_status() << endl;
     } else {
         cout << "B_Transport_response_OK" << endl;
     }
