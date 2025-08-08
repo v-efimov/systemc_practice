@@ -24,8 +24,8 @@ void testbench_module::tbchk_thread() {
       testbench_memmodel_trans->set_address(response.model_data_struct.bus_addr);
       data_array[0] = response.model_data_struct.bus_data;
       testbench_memmodel_trans->set_data_ptr( reinterpret_cast<unsigned char*>(data_array) );
-      testbench_memmodel_trans->set_data_length(sizeof(data_array));
-      testbench_memmodel_trans->set_streaming_width(sizeof(data_array));
+      testbench_memmodel_trans->set_data_length(1);
+      testbench_memmodel_trans->set_streaming_width(1);
       testbench_memmodel_trans->set_byte_enable_ptr(0);
       testbench_memmodel_trans->set_dmi_allowed(false);
       testbench_memmodel_trans->set_response_status(tlm::TLM_INCOMPLETE_RESPONSE);
@@ -34,7 +34,7 @@ void testbench_module::tbchk_thread() {
       testbench_memmodel_socket->b_transport(*testbench_memmodel_trans, model_delay);
 
       if ( testbench_memmodel_trans->get_response_status() != tlm::TLM_OK_RESPONSE ) {
-          cout << "Transaction returned with error: " << testbench_memmodel_trans->get_response_status() << endl;
+          cout << "Transaction_return_is_NOT_ok: " << testbench_memmodel_trans->get_response_status() << endl;
           sim_test_ok = false;
       } else {
           cout << "B_Transport_response_OK" << endl;

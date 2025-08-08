@@ -3,45 +3,28 @@
 
 void memmodel_module::b_transport (tlm::tlm_generic_payload& trans, sc_time& delay) {
 
-        int command = 0;
-        //check tlm_generic_payload
-
-        tlm::tlm_command cmd = trans.get_command();
-
         std::uint32_t addr = trans.get_address();
         uint32_t* data = reinterpret_cast<uint32_t*>(trans.get_data_ptr());
-        size_t length = trans.get_data_length() / sizeof(uint32_t);
 
-        ///We can do input checks here and if something wrong dont proceed but set response status
-        /*
-        if (adr < 0 ) {
-            trans.set_response_status (tlm::TLM_ADDRESS_ERROR_RESPONSE);
-            return;
+        cout << "MODEL_CALLED: " << addr << endl;
+        switch (trans.get_command()) {
+            case tlm::TLM_READ_COMMAND: {
+                data[0] = sparse_array[addr];
+                cout << "TLM_read_COMMAND" << endl;
+                break;
+            }
+            case tlm::TLM_WRITE_COMMAND: {
+                sparse_array[addr] = data[0];
+                cout << "TLM_write_COMMAND" << endl;
+                break;
+            }
+            default: {
+            cout << "TLM_not_read_nor_write" << endl;
+            }
         }
-        if (byt != 0 ) {
-            trans.set_response_status (tlm::TLM_BYTE_ENABLE_ERROR_RESPONSE);
-            return;
-        }
-        if (len > 4 || wid < len ) {
-            trans.set_response_status (tlm::TLM_BURST_ERROR_RESPONSE);
-            return;
-        }
-        */
 
-        for (int i=0; i<length; i++) {
-            cout << "MODEL_CALLED: " << addr << endl;
-            if (trans.is_read()) {
-                data[i] = sparse_array[addr+i];
-                cout << "TLM_rread_COMMAND" << endl;
-            }
-            if (trans.is_write()) {
-                sparse_array[addr+i] = data[i];
-                cout << "TLM_wwrite_COMMAND" << endl;
-            }
-            cout << "ADDR: " << addr << endl;
-            cout << "DATA: " << data[0] << endl;
-            cout << "LENGTH: " << length << endl;
-        }
+        cout << "ADDR: " << addr << endl;
+        cout << "DATA: " << data[0] << endl;
 
         cout << "DELDEL: " << delay << endl;
         wait(delay);
