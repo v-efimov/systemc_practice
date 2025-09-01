@@ -1,3 +1,5 @@
+//============== Modifyed Verilator SystemC top module =================
+//======================Original header=================================
 // -*- SystemC -*-
 // DESCRIPTION: Verilator Example: Top level main for invoking SystemC model
 //
@@ -30,6 +32,7 @@
 
 int sc_main(int argc, char* argv[]) {
 
+  try {
     // Prevent unused variable warnings
     if (false && argc && argv) {}
 
@@ -161,6 +164,10 @@ int sc_main(int argc, char* argv[]) {
     VerilatedCov::write("logs/coverage.dat");
 #endif
 
-    // Return good completion status
-    return 0;
+  } catch (const sc_report& e) {
+    std::cerr << "Caught SystemC exception: " << e.what() << std::endl;
+    return 1;
+  }
+  // Return good completion status
+  return 0;
 }
